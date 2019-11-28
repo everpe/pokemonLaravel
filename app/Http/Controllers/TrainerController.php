@@ -63,8 +63,9 @@ class TrainerController extends Controller
     public function show(Trainer $trainer)
     {
         //$trainer=Trainer::find($id);
+              
+      //  $trainer=Trainer::where('slug','=',$slug)->firstOrFail();
         return view('trainers.show',compact('trainer'));
-       
     }
 
     /**
