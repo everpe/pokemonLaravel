@@ -69,14 +69,14 @@ class TrainerController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra formulario para editar un recurso.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Trainer $trainer)
     {
-        //
+        return view('trainers.edit',compact('trainer'));
     }
 
     /**
@@ -86,9 +86,20 @@ class TrainerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Trainer $trainer)
     {
-        //
+        //se envia todo menos el avatar ya que es una ruta
+        $trainer->fill($request->except('avatar'));
+
+        if($request->hasFile('avatar'))
+        {   
+            $file=$request->file('avatar');
+            $name=time().$file->getClientOriginalName();//Da un nombre único con fecha
+            $trainer->avatar=$name;
+            $file->move(public_path().'/images/',$name);//Guarda el file en esa ruta
+        }
+        $trainer ->save();
+        return 'Actualizado';
     }
 
     /**

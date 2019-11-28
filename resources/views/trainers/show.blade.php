@@ -14,7 +14,8 @@
             <img style="margin:20px;height:100px; width:100px; background-color:#EFEFEF" 
             src="{{URL::asset('images/')}}./{{$trainer->avatar}}" class="card-img-top rounded-circle mx-auto d-block" alt="...">
             
-            <p>{{$trainer->description}}</p>    
+            <p>{{$trainer->description}}</p>  
+            <a href="{{ url('/trainers/'.$trainer->slug.'/edit') }}" class="btn btn-primary">Editar</a>  
         </div>
     </div>
     <br>
